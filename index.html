@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>play ding ding sound once after 8 minutes, play 3 times after 9 minutes, play 10 times after 10 minutes</p>
+
+<button onclick="timerFunction()">start</button>
+
+<p id="timer">Click on "start". I will display when 8 minutes, 9 minutes, and 10 minutes have passed.</p>
+
+<br>
+<br>
+
+<p>In case of needing to play the sound manually, use the controler below.</p>
+
+<audio id="myAudio" controls>
+  <source src="dingDingSoundEffect.mp3" type="audio/mp3">
+</audio>
+
+<script>
+
+
+function playAudio() {
+  document.getElementById("myAudio").play();
+  console.log('playing')
+}
+
+
+function timerFunction() {
+  document.getElementById("timer").innerHTML = "timer started";
+  setTimeout(myTimeout1, 8*60*1000);
+  setTimeout(myTimeout2, 9*60*1000);
+  setTimeout(myTimeout3, 10*60*1000);
+}
+
+
+function repeatAudio(times) {
+  var i = 0;
+  function myLoop () {           //  create a loop function
+     setTimeout(function () {    //  call a 2s setTimeout when the loop is called
+        playAudio();          //  your code here
+        i++;                     //  increment the counter
+        if (i < times) {            //  if the counter < 10, call the loop function
+           myLoop();             //  ..  again which will trigger another
+        }                        //  ..  setTimeout()
+     }, 1500)
+  }
+  myLoop();
+}
+
+function myTimeout1() {
+  document.getElementById("timer").innerHTML = "8 minutes passed";
+  repeatAudio(1);
+}
+
+function myTimeout2() {
+  document.getElementById("timer").innerHTML = "9 minutes passed";
+  repeatAudio(3);
+}
+
+function myTimeout3() {
+  document.getElementById("timer").innerHTML = "10 minutes passed";
+  repeatAudio(10);
+}
+</script>
+
+</body>
+</html>
