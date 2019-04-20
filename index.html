@@ -1,5 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>timer</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+</head>
+
 <body>
 
 <p>play ding ding sound once after 8 minutes, play 3 times after 9 minutes, play 10 times after 10 minutes</p>
@@ -7,7 +15,7 @@
 <button onclick="timerFunction()">start</button>
 
 <p id="timer">Click on "start". I will display when 8 minutes, 9 minutes, and 10 minutes have passed.</p>
-
+<p id="timePassed"></div>
 <br>
 <br>
 
@@ -25,14 +33,39 @@ function playAudio() {
   console.log('playing')
 }
 
+function markPresent() {
+    window.markDate = new Date();
+    $(document).ready(function() {
+        $("div.absent").toggleClass("present");
+    });
+    updateClock();
+}
+
+function updateClock() {
+    var currDate = new Date();
+    var diff = currDate - markDate;
+    document.getElementById("timePassed").innerHTML = 'time passed: '+format(diff/1000);
+    setTimeout(function() {updateClock()}, 1000);
+}
+
+function format(seconds)
+{
+var numhours = parseInt(Math.floor(((seconds % 31536000) % 86400) / 3600),10);
+var numminutes = parseInt(Math.floor((((seconds % 31536000) % 86400) % 3600) / 60),10);
+var numseconds = parseInt((((seconds % 31536000) % 86400) % 3600) % 60,10);
+    return ((numhours<10) ? "0" + numhours : numhours)
+    + ":" + ((numminutes<10) ? "0" + numminutes : numminutes)
+    + ":" + ((numseconds<10) ? "0" + numseconds : numseconds);
+}
+
 
 function timerFunction() {
   document.getElementById("timer").innerHTML = "timer started";
+  markPresent();
   setTimeout(myTimeout1, 8*60*1000);
   setTimeout(myTimeout2, 9*60*1000);
   setTimeout(myTimeout3, 10*60*1000);
 }
-
 
 function repeatAudio(times) {
   var i = 0;
