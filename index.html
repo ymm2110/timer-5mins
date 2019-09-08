@@ -10,7 +10,7 @@
 
 <body>
 
-<p>play ding ding sound once after 2 minutes, play 3 times after 3 minutes, play 10 times after 5 minutes</p>
+<p>play ding ding sound once after 1 minutes 30 seconds, play 5 times after 2 minutes.</p>
 
 <button onclick="timerFunction()">start</button>
 
@@ -67,9 +67,9 @@ var numseconds = parseInt((((seconds % 31536000) % 86400) % 3600) % 60,10);
 function timerFunction() {
   document.getElementById("timer").innerHTML = "timer started";
   markPresent();
-  setTimeout(myTimeout1, 2*60*1000);
-  setTimeout(myTimeout2, 3*60*1000);
-  setTimeout(myTimeout3, 5*60*1000);
+  setTimeout(myTimeout1, 1.5*60*1000);
+  setTimeout(myTimeout2, 2*60*1000);
+  //setTimeout(myTimeout3, 5*60*1000);
 }
 
 function repeatAudio(times) {
@@ -87,13 +87,13 @@ function repeatAudio(times) {
 }
 
 function myTimeout1() {
-  document.getElementById("timer").innerHTML = "2 minutes passed";
+  document.getElementById("timer").innerHTML = "1.5 minutes passed";
   repeatAudio(1);
 }
 
 function myTimeout2() {
-  document.getElementById("timer").innerHTML = "3 minutes passed";
-  repeatAudio(3);
+  document.getElementById("timer").innerHTML = "2 minutes passed";
+  repeatAudio(5);
 }
 
 function myTimeout3() {
